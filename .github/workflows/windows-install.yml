@@ -28,7 +28,7 @@ jobs:
         shell: powershell
         run: |
           $ErrorActionPreference = 'Stop'
-          & .\install.ps1 -Uninstall
+          & .\install-local.ps1 -Uninstall
           foreach ($folder in @([Environment]::GetFolderPath('Desktop'), [Environment]::GetFolderPath('Programs'))) {
             if (Test-Path (Join-Path $folder '卡若智能白板.lnk')) { throw 'Shortcut left after uninstall' }
           }

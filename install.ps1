@@ -1,4 +1,4 @@
-﻿param([switch]$Uninstall, [switch]$TV, [string]$DeviceIP, [string]$DeviceId)
+param([switch]$Uninstall, [switch]$TV, [string]$DeviceIP, [string]$DeviceId)
 $ErrorActionPreference = 'Stop'
 $AppDirectory = Join-Path $env:LOCALAPPDATA 'KaruoWhiteboard'
 $DesktopLink = Join-Path ([Environment]::GetFolderPath('Desktop')) '卡若智能白板.lnk'
