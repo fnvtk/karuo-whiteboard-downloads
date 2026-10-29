@@ -59,14 +59,17 @@ if (-not $Browser) { throw (Get-WhiteboardText '\u8bf7\u5148\u5b89\u88c5 Microso
 New-Item -ItemType Directory -Path $AppDirectory -Force | Out-Null
 $Arguments = '--app=https://wz_wb.quwanzhi.com/?compat=modern --start-fullscreen'
 $Shell = New-Object -ComObject WScript.Shell
+# WScript shortcut saving is sensitive to non-ASCII filenames on some Windows locales.
+$CanonicalLink = Join-Path $AppDirectory 'KaruoWhiteboard.lnk'
+$Shortcut = $Shell.CreateShortcut($CanonicalLink)
+$Shortcut.TargetPath = $Browser
+$Shortcut.Arguments = $Arguments
+$Shortcut.Description = (Get-WhiteboardText '\u5361\u82e5\u667a\u80fd\u767d\u677f')
+$Shortcut.WorkingDirectory = $AppDirectory
+$Shortcut.Save()
 foreach ($Link in @($DesktopLink,$StartLink)) {
     New-Item -ItemType Directory -Path (Split-Path -Parent $Link) -Force | Out-Null
-    $Shortcut = $Shell.CreateShortcut($Link)
-    $Shortcut.TargetPath = $Browser
-    $Shortcut.Arguments = $Arguments
-    $Shortcut.Description = (Get-WhiteboardText '\u5361\u82e5\u667a\u80fd\u767d\u677f \u00b7 \u4f1a\u8bae\u3001AI\u6574\u7406\u4e0e\u56e2\u961f\u534f\u4f5c')
-    $Shortcut.WorkingDirectory = $AppDirectory
-    $Shortcut.Save()
+    Copy-Item -LiteralPath $CanonicalLink -Destination $Link -Force
 }
 @{ Product=(Get-WhiteboardText '\u5361\u82e5\u667a\u80fd\u767d\u677f'); Version='2026.10.29-preview'; Website='https://wz_wb.quwanzhi.com'; Type='HostedWebApp' } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $AppDirectory 'install.json') -Encoding UTF8
 Write-Host (Get-WhiteboardText '\u5b89\u88c5\u5b8c\u6210\uff1a\u684c\u9762\u548c\u5f00\u59cb\u83dc\u5355\u5df2\u6dfb\u52a0\u201c\u5361\u82e5\u667a\u80fd\u767d\u677f\u201d\u3002\u65e0\u9700\u7ba1\u7406\u5458\u6743\u9650\u3002')
