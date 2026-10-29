@@ -4,7 +4,7 @@ $AppDirectory = Join-Path $env:LOCALAPPDATA 'KaruoWhiteboard'
 $DesktopLink = Join-Path ([Environment]::GetFolderPath('Desktop')) '卡若智能白板.lnk'
 $StartLink = Join-Path ([Environment]::GetFolderPath('Programs')) '卡若智能白板.lnk'
 if ($Uninstall -and -not $TV) {
-    Remove-Item -LiteralPath $DesktopLink,$StartLink -Force -ErrorAction SilentlyContinue
+    foreach ($Link in @($DesktopLink,$StartLink)) { if (Test-Path -LiteralPath $Link) { Remove-Item -LiteralPath $Link -Force } }
     if (Test-Path $AppDirectory) { Remove-Item -LiteralPath $AppDirectory -Recurse -Force }
     Write-Host '已移除白板快捷方式；浏览器中的会议数据和账号保持。'
     return
