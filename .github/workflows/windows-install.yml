@@ -14,7 +14,7 @@ jobs:
         shell: powershell
         run: |
           $ErrorActionPreference = 'Stop'
-          irm https://raw.githubusercontent.com/fnvtk/karuo-whiteboard-downloads/main/install.ps1 | iex
+          irm "https://raw.githubusercontent.com/fnvtk/karuo-whiteboard-downloads/$env:GITHUB_SHA/install.ps1" | iex
           $desktop = Join-Path ([Environment]::GetFolderPath('Desktop')) '卡若智能白板.lnk'
           $programs = Join-Path ([Environment]::GetFolderPath('Programs')) '卡若智能白板.lnk'
           if (-not (Test-Path $desktop)) { throw 'Desktop shortcut missing' }
