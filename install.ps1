@@ -58,6 +58,7 @@ New-Item -ItemType Directory -Path $AppDirectory -Force | Out-Null
 $Arguments = '--app=https://wz_wb.quwanzhi.com/?compat=modern --start-fullscreen'
 $Shell = New-Object -ComObject WScript.Shell
 foreach ($Link in @($DesktopLink,$StartLink)) {
+    New-Item -ItemType Directory -Path (Split-Path -Parent $Link) -Force | Out-Null
     $Shortcut = $Shell.CreateShortcut($Link)
     $Shortcut.TargetPath = $Browser
     $Shortcut.Arguments = $Arguments
