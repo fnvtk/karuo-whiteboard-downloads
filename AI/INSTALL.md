@@ -12,7 +12,7 @@ irm https://raw.githubusercontent.com/fnvtk/karuo-whiteboard-downloads/main/inst
 
 Android安装：让用户从Releases下载APK并在电视打开，或在已经授权且连接的ADB设备上执行 `adb install -r karuo-whiteboard-tv.apk`。不要给未知设备安装、不要自动授权摄像头。
 
-当前版本为预览版，收款未开通。不要把会员UI、模拟支付测试或订单创建当成真实付款到账与开通成功。
+会员收款使用应用内微信扫码。不要代替用户付款；会员UI、模拟支付测试或订单创建不代表真实付款到账与开通成功。
 
 ## Windows 给 Android 电视一键安装
 
