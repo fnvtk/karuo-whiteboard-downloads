@@ -1,0 +1,35 @@
+name: Windows one-command installation
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  install:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run consumer one-command installer
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+          irm https://raw.githubusercontent.com/fnvtk/karuo-whiteboard-downloads/main/install.ps1 | iex
+          $desktop = Join-Path ([Environment]::GetFolderPath('Desktop')) '卡若智能白板.lnk'
+          $programs = Join-Path ([Environment]::GetFolderPath('Programs')) '卡若智能白板.lnk'
+          if (-not (Test-Path $desktop)) { throw 'Desktop shortcut missing' }
+          if (-not (Test-Path $programs)) { throw 'Start menu shortcut missing' }
+          $shortcut = (New-Object -ComObject WScript.Shell).CreateShortcut($desktop)
+          if (-not (Test-Path $shortcut.TargetPath)) { throw 'Browser target missing' }
+          if ($shortcut.Arguments -notmatch '--app=https://wz_wb.quwanzhi.com/') { throw 'App URL missing' }
+          Write-Host 'WINDOWS_ONE_COMMAND_DESKTOP_START_MENU_AND_TARGET_OK'
+      - name: Uninstall and verify removal
+        if: always()
+        shell: powershell
+        run: |
+          $ErrorActionPreference = 'Stop'
+          & .\install.ps1 -Uninstall
+          foreach ($folder in @([Environment]::GetFolderPath('Desktop'), [Environment]::GetFolderPath('Programs'))) {
+            if (Test-Path (Join-Path $folder '卡若智能白板.lnk')) { throw 'Shortcut left after uninstall' }
+          }
+          Write-Host 'WINDOWS_UNINSTALL_READBACK_OK'
