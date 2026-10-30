@@ -2,7 +2,7 @@
 
 会议电视上的书写、讨论、AI整理与分享。Windows 一条命令添加独立全屏应用入口；Android 电视可安装 APK。
 
-**会员套餐：月卡¥19.8、年卡¥198、五年卡¥598。应用内微信扫码购买，不自动续费。AI总结、群分享、食指书写各有10次免费体验。真实付款到账联动尚待买家验收。**
+**会员套餐：月卡¥19.8、年卡¥198、五年卡¥598。应用内微信扫码购买，不自动续费。AI总结、群分享、隔空书写各有10次免费体验。真实付款到账联动尚待买家验收。**
 
 ## Windows 安装
 
@@ -16,7 +16,7 @@ irm https://raw.githubusercontent.com/fnvtk/karuo-whiteboard-downloads/main/inst
 
 ## Android 会议电视
 
-从本仓库的 [Releases](https://github.com/fnvtk/karuo-whiteboard-downloads/releases) 下载 `karuo-whiteboard-tv.apk`，复制到电视，用文件管理器打开安装。首次安装按电视提示允许本次来源。需要 Android 6 或以上、Google Chrome 和触控屏；食指书写另需摄像头。
+从本仓库的 [Releases](https://github.com/fnvtk/karuo-whiteboard-downloads/releases) 下载 `karuo-whiteboard-tv.apk`，复制到电视，用文件管理器打开安装。首次安装按电视提示允许本次来源。需要 Android 6 或以上、Google Chrome 和触控屏；隔空书写另需摄像头。
 
 已配置 ADB 的电脑可使用：
 
